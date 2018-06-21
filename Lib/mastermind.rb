@@ -14,15 +14,11 @@ press \'q\' to quit, or enter your first guess.'
 end
 
 class Code
-  attr_reader :code
+  attr_reader :answer
 
   def generate_code
-    code = []
     @colors = ["r", "g", "o", "b", "y", "p"]
-    4.times do |inject|
-      code << @colors.sample
-    end
-    code
+    answer = (1..4).map { @colors[rand(6)] }
   end
 end
 
@@ -39,7 +35,7 @@ class Response
     @player_input = gets.chomp.downcase.gsub(/[\W]/, "")
   end
 
-  def valid_length?(input = @player_input)
+  def valid_length?
     @player_input.length != 4
   end
 
@@ -53,7 +49,7 @@ end
 def main
   game = Mastermind.new
   game.show_instructions
-  secret_code = Code.new.generate_code
+  answer = Code.new.generate_code
   input = Response.new(input).get_input
 end
 
