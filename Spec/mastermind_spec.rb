@@ -1,7 +1,7 @@
 require "mastermind"
 
 RSpec.describe Mastermind, "welcome user and show game commands" do
-  mastermind = Mastermind.new
+  let(:mastermind) { Mastermind.new }
 
   it "greets the player with game instructions " do
     expect { mastermind.show_instructions }.to output(/Welcome/).to_stdout
@@ -9,8 +9,7 @@ RSpec.describe Mastermind, "welcome user and show game commands" do
 end
 
 RSpec.describe Code, "creates a code" do
-  code = Code.new
-
+  let(:code) { Code.new }
   let(:colors) { ["r", "g", "o", "b", "y", "p"] }
 
   it "generates a 4 digit code" do
@@ -25,9 +24,13 @@ RSpec.describe Code, "creates a code" do
 end
 
 RSpec.describe Response, "receive valid input" do
-  response = Response.new
+  let(:response) { Response.new("rgo") }
 
-  it "ensures there are only 4 letters entered" do
-    expect { response.validate_length("abcf") }.to output("Invalid response, please enter exactly 4 colors\n").to_stdout
+  it "validates length" do
+    expect(response.valid_length?).to eq(true)
+  end
+
+  it "returns invalid input message" do
+    expect { response.length_error }.to output(/Invalid length/).to_stdout
   end
 end

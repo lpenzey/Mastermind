@@ -29,20 +29,23 @@ end
 class Response
   attr_reader :player_input
 
-  def initialize
+  def initialize(new_input)
     @valid_guess = false
-    @player_input = ""
+    @player_input = new_input
   end
 
   def get_input
     puts "Please enter a guess from the available colors: r, g, o, b, y, p"
-    @player_input = gets.chomp
-    return @player_input.downcase.gsub(/[\W]/, "")
+    @player_input = gets.chomp.downcase.gsub(/[\W]/, "")
   end
 
-  def validate_length(guess)
-    if @player_input.length != 4
-      puts "Invalid response, please enter exactly 4 colors"
+  def valid_length?(input = @player_input)
+    @player_input.length != 4
+  end
+
+  def length_error
+    if valid_length?
+      puts "Invalid length, please enter exactly 4 colors"
     end
   end
 end
@@ -51,7 +54,7 @@ def main
   game = Mastermind.new
   game.show_instructions
   secret_code = Code.new.generate_code
-  input = Response.new.get_input
+  input = Response.new(input).get_input
 end
 
 if __FILE__ == $0
