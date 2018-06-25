@@ -20,11 +20,6 @@ class Code
     @colors = colors = ["r", "g", "o", "y", "b", "p"]
     answer = (1..4).map { @colors[rand(6)] }
   end
-
-  #def compare(code, guess)
-
-  #end
-
 end
 
 class Response
@@ -38,8 +33,8 @@ class Response
   def get_input
     puts "Please enter a guess from the available colors: r, g, o, b, y, p"
     @player_input = gets.chomp.downcase.gsub(/[\W]/, "")
-    if length_error || color_error
-    end
+    get_input if length_error || color_error
+    @player_input
   end
 
   def valid_length?
@@ -49,7 +44,6 @@ class Response
   def length_error
     if valid_length? == false
       puts "Invalid length, please enter exactly 4 colors"
-      get_input
     end
   end
 
@@ -64,7 +58,6 @@ class Response
   def color_error
     if valid_colors? == false
       puts "Invalid colors, please enter only available colors: r, g, o, y, b, p."
-      get_input
     end
   end
 end

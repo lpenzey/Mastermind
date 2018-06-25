@@ -35,7 +35,7 @@ RSpec.describe Response, "validate input length" do
   end
 end
 
-RSpec.describe Response, "validate input choices" do
+RSpec.describe Response, "validate input colors" do
   let(:response) { Response.new("rxop") }
 
   it "validates color choices" do
