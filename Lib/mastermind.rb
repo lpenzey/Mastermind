@@ -31,7 +31,7 @@ class Response
   end
 
   def get_input
-    puts "Please enter a guess from the available colors: r, g, o, b, y, p"
+    puts "Please enter a guess from available colors: r, g, o, b, y, p"
     @player_input = gets.chomp.downcase.gsub(/[\W]/, "")
     get_input if length_error || color_error
     @player_input
