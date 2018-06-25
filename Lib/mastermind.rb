@@ -17,9 +17,14 @@ class Code
   attr_reader :answer
 
   def generate_code
-    @colors = ["r", "g", "o", "b", "y", "p"]
+    @colors = colors = ["r", "g", "o", "y", "b", "p"]
     answer = (1..4).map { @colors[rand(6)] }
   end
+
+  #def compare(code, guess)
+
+  #end
+
 end
 
 class Response
@@ -33,15 +38,33 @@ class Response
   def get_input
     puts "Please enter a guess from the available colors: r, g, o, b, y, p"
     @player_input = gets.chomp.downcase.gsub(/[\W]/, "")
+    if length_error || color_error
+    end
   end
 
   def valid_length?
-    @player_input.length != 4
+    @player_input.length == 4
   end
 
   def length_error
-    if valid_length?
+    if valid_length? == false
       puts "Invalid length, please enter exactly 4 colors"
+      get_input
+    end
+  end
+
+  def valid_colors?
+    if /\A[rgobyp][rgobyp][rgobyp][rgobyp]\z/.match(@player_input.to_s)
+      @valid_guess = true
+    else
+      @valid_guess = false
+    end
+  end
+
+  def color_error
+    if valid_colors? == false
+      puts "Invalid colors, please enter only available colors: r, g, o, y, b, p."
+      get_input
     end
   end
 end
