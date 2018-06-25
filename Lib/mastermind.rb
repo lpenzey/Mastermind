@@ -42,22 +42,24 @@ class Response
   end
 
   def length_error
-    if valid_length? == false
+    if !valid_length?
       puts "Invalid length, please enter exactly 4 colors"
+      return true
+    else
+      false
     end
   end
 
   def valid_colors?
-    if /\A[rgobyp][rgobyp][rgobyp][rgobyp]\z/.match(@player_input.to_s)
-      @valid_guess = true
-    else
-      @valid_guess = false
-    end
+    true if /\A[rgobyp][rgobyp][rgobyp][rgobyp]\z/.match(@player_input.to_s)
   end
 
   def color_error
-    if valid_colors? == false
+    if !valid_colors?
       puts "Invalid colors, please enter only available colors: r, g, o, y, b, p."
+      return true
+    else
+      false
     end
   end
 end
