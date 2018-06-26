@@ -42,12 +42,9 @@ class Response
   end
 
   def length_error
-    if !valid_length?
-      puts "Invalid length, please enter exactly 4 colors"
-      return true
-    else
-      false
-    end
+    return false if valid_length?
+    puts "Invalid length, please enter exactly 4 colors"
+    true
   end
 
   def valid_colors?
@@ -55,12 +52,9 @@ class Response
   end
 
   def color_error
-    if !valid_colors?
-      puts "Invalid colors, please enter only available colors: r, g, o, y, b, p."
-      return true
-    else
-      false
-    end
+    return false if valid_colors?
+    puts "Invalid colors, please enter only available colors: r, g, o, y, b, p."
+    true
   end
 end
 
