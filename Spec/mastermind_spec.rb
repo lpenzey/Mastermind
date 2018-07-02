@@ -1,4 +1,4 @@
-require "mastermind" # ~> LoadError: cannot load such file -- mastermind
+require "mastermind"
 
 RSpec.describe Welcome, "welcome user and show game commands" do
   let(:mastermind) { Welcome.new }
@@ -140,10 +140,3 @@ RSpec.describe Response, "validate input colors" do
     expect { response.color_error }.to output(/Invalid colors/).to_stdout
   end
 end
-
-# ~> LoadError
-# ~> cannot load such file -- mastermind
-# ~>
-# ~> /Users/lucaspenzeymoog/.rbenv/versions/2.3.1/lib/ruby/2.3.0/rubygems/core_ext/kernel_require.rb:55:in `require'
-# ~> /Users/lucaspenzeymoog/.rbenv/versions/2.3.1/lib/ruby/2.3.0/rubygems/core_ext/kernel_require.rb:55:in `require'
-# ~> /Users/lucaspenzeymoog/Desktop/Coding/Mastermind/Spec/mastermind_spec.rb:1:in `<main>'
