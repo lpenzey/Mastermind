@@ -39,7 +39,7 @@ RSpec.describe Response, "validate input colors" do
   let(:response) { Response.new("rxop") }
 
   it "validates color choices" do
-    expect(response.valid_colors?).to eq nil
+    expect(response.valid_colors?).to be_nil
   end
 
   it "returns invalid color message" do
