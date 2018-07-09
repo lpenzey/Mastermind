@@ -8,124 +8,86 @@ RSpec.describe Welcome, "welcome user and show game commands" do
   end
 end
 
-RSpec.describe Code, "creates a code" do
+RSpec.describe Code, "creates and compares code with guess" do
   let(:code) { Code.new }
   let(:colors) { ["r", "g", "o", "y", "b", "p"] }
 
-  it "generates a 4 digit code" do
-    expect(code.generate_code.size).to eq 4
-  end
+  describe "#generate_code" do
+    it "generates a 4 digit code" do
+      expect(code.generate_code.size).to eq 4
+    end
 
-  it "only guess values from available colors" do
-    code.generate_code.each do |char|
-      expect(["r", "g", "o", "b", "y", "p"].include?(char)).to eq(true)
+    it "only guess values from available colors" do
+      code.generate_code.each do |char|
+        expect(["r", "g", "o", "b", "y", "p"].include?(char)).to eq(true)
+      end
     end
   end
-end
 
-RSpec.describe Code, "compares guess with secret_key" do
-  let(:code) { Code.new }
-  let(:colors) { ["r", "g", "o", "y", "b", "p"] }
-  let(:key) { ["r", "r", "r", "r"] }
-  let(:input) { ["r", "r", "r", "r"] }
+  describe "#red_counter" do
+    it "returns number of red pins" do
+      key   = ["r", "r", "r", "r"]
+      input = ["r", "r", "r", "r"] 
+      expect(code.red_counter(key, input)).to eq [1, 1, 1, 1]
+    end
 
-  it "returns number of red pins" do
-    expect(code.red_counter(key, input)).to eq [1, 1, 1, 1]
-  end
-end
+    it "returns number of red pins" do
+      key   = ["r", "r", "y", "b"]
+      input = ["r", "r", "p", "o"] 
+      expect(code.red_counter(key, input)).to eq [1, 1]
+    end
+  end 
 
-RSpec.describe Code, "compares guess with secret_key" do
-  let(:code) { Code.new }
-  let(:colors) { ["r", "g", "o", "y", "b", "p"] }
-  let(:key) { ["r", "r", "y", "b"] }
-  let(:input) { ["r", "r", "p", "o"] }
+  describe "#trim" do 
+    it "deletes input position if it is the same as key index" do
+      key   = ["r", "g", "y", "r"]
+      input = ["r", "o", "b", "r"] 
+      expect(code.trim(key, input)).to eq ["", "o", "b", ""]
+    end
 
-  it "returns number of red pins" do
-    expect(code.red_counter(key, input)).to eq [1, 1]
-  end
-end
-
-RSpec.describe Code, "trims code" do
-  let(:code) { Code.new }
-  let(:key) { ["r", "g", "y", "r"] }
-  let(:input) { ["r", "o", "b", "r"] }
-
-  it "deletes input position if it is the same as key index" do
-    expect(code.trim(key, input)).to eq ["", "o", "b", ""]
-  end
-end
-
-RSpec.describe Code, "trims code" do
-  let(:code) { Code.new }
-  let(:key) { ["y", "b", "p", "o"] }
-  let(:input) { ["y", "b", "p", "r"] }
-
-  it "deletes input position if it is the same as key index" do
-    expect(code.trim(key, input)).to eq ["", "", "", "r"]
-  end
-end
-
-RSpec.describe Code, "counts white pins" do
-  let(:code) { Code.new }
-  let(:key) { ["y", "b", "y", "r"] }
-  let(:input) { ["", "y", "b", ""] }
-
-  it "accurately counts white pins" do
-    expect(code.white_counter(key, input)).to eq ["y", "b"]
-  end
-end
-
-RSpec.describe Code, "counts white pins" do
-  let(:code) { Code.new }
-  let(:key) { ["b", "y", "y", "b"] }
-  let(:input) { ["b", "", "", ""] }
-
-  it "accurately counts white pins with duplicates" do
-    expect(code.white_counter(key, input)).to eq ["b"]
-  end
-end
-
-RSpec.describe Code, "counts white pins" do
-  let(:code) { Code.new }
-  let(:key) { ["g", "g", "r", "r"] }
-  let(:input) { ["r", "r", "g", "g"] }
-
-  it "accurately counts white pins with duplicates" do
-    expect(code.white_counter(key, input)).to eq ["g", "g", "r", "r"]
-  end
-end
-
-RSpec.describe Code, "counts white pins" do
-  let(:code) { Code.new }
-  let(:key) { ["b", "g", "r", "g"] }
-  let(:input) { ["r", "", "b", ""] }
-
-  it "accurately counts white pins with duplicates" do
-    expect(code.white_counter(key, input)).to eq ["b", "r"]
-  end
-end
-
-RSpec.describe Code, "feedback" do
-  let(:code) { Code.new }
-  let(:key) { ["y", "b", "p", "o"] }
-  let(:input) { ["y", "b", "p", "r"] }
-  let(:white_pins) { [1, 1] }
-  let(:red_pins) { [1, 1] }
-
-  it "gives pin feedback to user" do
-    expect { code.feedback(white_pins, red_pins)}.to output("You have " + red_pins.length.to_s + " red pins and " + white_pins.length.to_s + " white pins. Keep going!\n").to_stdout
-  end
-end
-
-RSpec.describe Response, "validate input length" do
-  let(:response) { Response.new("rgo") }
-
-  it "validates length" do
-    expect(response.valid_length?).to eq(false)
+    it "deletes input position if it is the same as key index" do
+      key   = ["y", "b", "p", "o"]
+      input = ["y", "b", "p", "r"] 
+      expect(code.trim(key, input)).to eq ["", "", "", "r"]
+    end
   end
 
-  it "returns invalid input message" do
-    expect { response.length_error }.to output(/Invalid length/).to_stdout
+  describe "#white_counter" do
+    it "accurately counts white pins" do
+      key   = ["y", "b", "y", "r"]
+      input = ["", "y", "b", ""] 
+      expect(code.white_counter(key, input)).to eq ["y", "b"]
+    end
+
+    it "accurately counts white pins with duplicates" do
+      key   = ["b", "y", "y", "b"]
+      input = ["b", "", "", ""] 
+      expect(code.white_counter(key, input)).to eq ["b"]
+    end
+
+    it "accurately counts white pins with no matches" do
+      key   = ["g", "g", "r", "r"]
+      input = ["r", "r", "g", "g"] 
+      expect(code.white_counter(key, input)).to eq ["g", "g", "r", "r"]
+    end
+  
+    let(:key) { ["b", "g", "r", "g"] }
+    let(:input) { ["r", "", "b", ""] }
+
+    it "accurately counts white pins with duplicates" do
+      expect(code.white_counter(key, input)).to eq ["b", "r"]
+    end
+  end
+
+  describe "#feedback" do
+    let(:key) { ["y", "b", "p", "o"] }
+    let(:input) { ["y", "b", "p", "r"] }
+    let(:white_pins) { [1, 1] }
+    let(:red_pins) { [1, 1] }
+
+    it "gives pin feedback to user" do
+      expect { code.feedback(white_pins, red_pins)}.to output("You have " + red_pins.length.to_s + " red pins and " + white_pins.length.to_s + " white pins. Keep going!\n").to_stdout
+    end
   end
 end
 
