@@ -83,7 +83,6 @@ class Response
     puts "Please enter a guess [****]"
     @player_input = gets.chomp.downcase.gsub(/[\W]/, "")
     get_input if length_error || color_error
-    
     @player_input.split(//)
   end
 
