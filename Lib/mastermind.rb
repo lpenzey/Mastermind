@@ -51,13 +51,13 @@ class Code
   end
 
   def white_counter(key, input)
-    x = (key & input).flat_map { |n| [n]*[key.count(n), input.count(n)].min }
-    white_pins = x.reject { |c| c.empty? }
-
+    white_pins = (key & input)
+    .flat_map { |n| [n]*[key.count(n), input.count(n)].min }
+    .reject { |c| c.empty? }
   end
 
   def feedback(white_pins, red_pins)
-    puts "You have " + red_pins.length.to_s + " red pins and " + white_pins.length.to_s + " white pins. Keep going!"
+    puts "You have #{red_pins.length} red pins and #{white_pins.length} white pins. Keep going!"
   end
 
   def won
