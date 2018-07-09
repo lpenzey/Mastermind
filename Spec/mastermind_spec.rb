@@ -86,13 +86,13 @@ RSpec.describe Code, "creates and compares code with guess" do
     let(:red_pins) { [1, 1] }
 
     it "gives pin feedback to user" do
-      expect { code.feedback(white_pins, red_pins)}.to output("You have " + red_pins.length.to_s + " red pins and " + white_pins.length.to_s + " white pins. Keep going!\n").to_stdout
+      expect { code.feedback(white_pins, red_pins)}.to output("You have #{red_pins.length} red pins and #{white_pins.length} white pins.\n").to_stdout
     end
   end
 end
 
-RSpec.describe Response, "validate input colors" do
-  let(:response) { Response.new("rxop") }
+RSpec.describe Response, "takes user input and gives feedback" do
+  let(:response) { Response.new("rxopp") }
 
   it "validates color choices" do
     expect(response.valid_colors?).to be_nil
@@ -100,5 +100,18 @@ RSpec.describe Response, "validate input colors" do
 
   it "returns invalid color message" do
     expect { response.color_error }.to output(/Invalid colors/).to_stdout
+  end
+
+  it "validates choice of length" do 
+    expect(response.valid_length?).to be false
+  end
+
+  it "returns invalid length message" do 
+    expect { response.length_error }.to output(/Invalid length/).to_stdout
+  end
+
+  it "quits the game if \"quit\" is entered" do
+    response = Response.new("quit")
+    expect{ response.leave }.to output(/Are you sure you want to quit?/).to_stdout
   end
 end
