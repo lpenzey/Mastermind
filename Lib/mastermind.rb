@@ -41,28 +41,13 @@ class Code
   end
 
   def trim(key, input)
-    position = 0
-    if input[position] == key[position]
-      input[position] = ""
-      key[position] = ""
+   4.times do |n|
+    if input[n] == key[n]
+      input[n] = ""
+      key[n] = ""
     end
-    position += 1
-    if input[position] == key[position]
-      input[position] = ""
-      key[position] = ""
-    end
-    position += 1
-    if input[position] == key[position]
-      input[position] = ""
-      key[position] = ""
-    end
-    position += 1
-    if input[position] == key[position]
-      input[position] = ""
-      key[position] = ""
-    end
-    position += 1
-    input
+  end
+  input
   end
 
   def white_counter(key, input)
