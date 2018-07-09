@@ -113,7 +113,7 @@ RSpec.describe Code, "feedback" do
   let(:red_pins) { [1, 1] }
 
   it "gives pin feedback to user" do
-    expect { code.feedback(white_pins, red_pins)}.to output("You have " + red_pins.length.to_s + " red pins and " + white_pins.length.to_s + " white pins. Keep going!").to_stdout
+    expect { code.feedback(white_pins, red_pins)}.to output("You have " + red_pins.length.to_s + " red pins and " + white_pins.length.to_s + " white pins. Keep going!\n").to_stdout
   end
 end
 

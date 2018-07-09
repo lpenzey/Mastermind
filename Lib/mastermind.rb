@@ -3,16 +3,13 @@ class Welcome
   def show_instructions
     puts "Welcome to Mastermind! Your challenge is
 to guess the secret four digit code in under 10 tries."
-    sleep 5
     puts ""
     puts "The code can include the following colors:
 Red(r), Green(g), Orange(o), Blue(b), Yellow(y) and Purple(p)
 Enter your guess by entering four color values from above, such as rgyb or pggy."
-    sleep 7
     puts ""
     puts "If you have a correct color in the right position, you get a red pin.
 If you have a correct color in the wrong position, you get a white pin"
-    sleep 5
     puts ""
     puts 'press \'q\' to quit, or hit enter to continue.'
     quit if gets.chomp.downcase == "q"
@@ -24,13 +21,7 @@ If you have a correct color in the wrong position, you get a white pin"
 end
 
 class Code
-  attr_reader :answer
-  attr_reader :player_input
-  attr_reader :red_pins
-  attr_reader :white_pins
-  attr_reader :position
-  attr_reader :secret
-
+  attr_reader :red_pins, :white_pins
 
   def generate_code
     @colors = colors = ["r", "g", "o", "y", "b", "p"]
@@ -81,7 +72,7 @@ class Code
   end
 
   def feedback(white_pins, red_pins)
-    puts "You have " + red_pins.length.to_s + " red pins and " + white_pins.compact.length.to_s + " white pins. Keep going!"
+    puts "You have " + red_pins.length.to_s + " red pins and " + white_pins.length.to_s + " white pins. Keep going!"
   end
 
   def won
