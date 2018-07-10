@@ -142,7 +142,8 @@ def main
     code1.trim(key, input)
     white_pins = code1.white_counter(key, input)
     code1.feedback(white_pins, red_pins)
-    puts "(#{10-guess} guesses remaining)" 
+    puts "(#{10-guess} guesses remaining)"
+    puts "" 
     guess += 1 
   end
   puts "Nice try, but the answer was #{secret} better luck next time!"
