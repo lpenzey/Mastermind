@@ -1,5 +1,25 @@
+module Escape
+  def leave
+      puts "Are you sure you want to quit? Type \"y\" to quit or \"r\" to restart."
+        if gets.chomp.downcase == "r"
+          load 'mastermind.rb' 
+        else
+          abort("Thanks for playing!")
+        end
+    end
+
+  def restart
+    puts "Would you like to quit or restart? Type \"q\" to quit or \"r\" to restart."
+        if gets.chomp.downcase == "r"
+          load 'mastermind.rb' 
+        else
+          abort("Thanks for playing!")
+        end
+      end
+end
 
 class Welcome
+  include Escape
   def show_instructions
     puts "Welcome to Mastermind! Your challenge is
 to guess the secret four digit code in under 10 tries."
@@ -11,12 +31,8 @@ Enter your guess by entering four color values from above, such as rgyb or pggy.
     puts "If you have a correct color in the right position, you get a red pin.
 If you have a correct color in the wrong position, you get a white pin"
     puts ""
-    puts 'press \'q\' to quit, or hit enter to continue.'
-    quit if gets.chomp.downcase == "q"
-  end
-
-  def quit
-    abort("It's been an honor serving with you. Farewell!")
+    puts 'type \'quit\' at any time to quit/restart, or hit enter to continue.'
+    leave if gets.chomp.downcase == "quit"
   end
 end
 
@@ -72,6 +88,7 @@ class Code
 end
 
 class Response
+  include Escape
   attr_reader :player_input
 
   def initialize(new_input)
@@ -82,6 +99,7 @@ class Response
   def get_input
     puts "Please enter a guess [****]"
     @player_input = gets.chomp.downcase.gsub(/[\W]/, "")
+    leave if @player_input == "quit"
     get_input if length_error || color_error
     @player_input.split(//)
   end
@@ -107,13 +125,16 @@ class Response
   end
 end
 
+MAX_GUESS_COUNT ||= 10
+
 def main
+  include Escape
   game = Welcome.new
   game.show_instructions
   code1 = Code.new
   secret = code1.generate_code
   guess = 1
-  while guess <= 10 
+  while guess <= MAX_GUESS_COUNT 
     key = secret.clone
     input = Response.new(input).get_input
     red_pins = code1.red_counter(key, input)
@@ -121,10 +142,12 @@ def main
     code1.trim(key, input)
     white_pins = code1.white_counter(key, input)
     code1.feedback(white_pins, red_pins)
-    puts "(#{10-guess} guesses remaining)" 
+    puts "(#{10-guess} guesses remaining)"
+    puts "" 
     guess += 1 
   end
-  print "Nice try, but the answer was " + secret.to_s + " better luck next time!"
+  puts "Nice try, but the answer was #{secret} better luck next time!"
+  restart
 end
 
 if __FILE__ == $0
