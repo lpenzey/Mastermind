@@ -3,10 +3,19 @@ module Escape
       puts "Are you sure you want to quit? Type \"y\" to quit or \"r\" to restart."
         if gets.chomp.downcase == "r"
           load 'mastermind.rb' 
-        else 
+        else
           abort("Thanks for playing!")
         end
     end
+
+  def restart
+    puts "Would you like to quit or restart? Type \"q\" to quit or \"r\" to restart."
+        if gets.chomp.downcase == "r"
+          load 'mastermind.rb' 
+        else
+          abort("Thanks for playing!")
+        end
+      end
 end
 
 class Welcome
@@ -119,6 +128,7 @@ end
 MAX_GUESS_COUNT ||= 10
 
 def main
+  include Escape
   game = Welcome.new
   game.show_instructions
   code1 = Code.new
@@ -135,7 +145,8 @@ def main
     puts "(#{10-guess} guesses remaining)" 
     guess += 1 
   end
-  print "Nice try, but the answer was #{secret} better luck next time!"
+  puts "Nice try, but the answer was #{secret} better luck next time!"
+  restart
 end
 
 if __FILE__ == $0
