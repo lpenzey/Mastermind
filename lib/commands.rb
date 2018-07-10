@@ -10,6 +10,8 @@ module Commands
             load MASTERMIND
           when "s"
             save
+          else
+            puts "I don't understand"
         end
   end
 
