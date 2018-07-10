@@ -1,12 +1,4 @@
-require "mastermind"
-
-RSpec.describe Welcome, "welcome user and show game commands" do
-  let(:mastermind) { Welcome.new }
-
-  it "greets the player with game instructions " do
-    expect { mastermind.show_instructions }.to output(/Welcome/).to_stdout
-  end
-end
+require "code"
 
 RSpec.describe Code, "creates and compares code with guess" do
   let(:code) { Code.new }
@@ -88,30 +80,5 @@ RSpec.describe Code, "creates and compares code with guess" do
     it "gives pin feedback to user" do
       expect { code.feedback(white_pins, red_pins)}.to output("You have #{red_pins.length} red pins and #{white_pins.length} white pins.\n").to_stdout
     end
-  end
-end
-
-RSpec.describe Response, "takes user input and gives feedback" do
-  let(:response) { Response.new("rxopp") }
-
-  it "validates color choices" do
-    expect(response.valid_colors?).to be_nil
-  end
-
-  it "returns invalid color message" do
-    expect { response.color_error }.to output(/Invalid colors/).to_stdout
-  end
-
-  it "validates choice of length" do 
-    expect(response.valid_length?).to be false
-  end
-
-  it "returns invalid length message" do 
-    expect { response.length_error }.to output(/Invalid length/).to_stdout
-  end
-
-  it "quits the game if \"quit\" is entered" do
-    response = Response.new("quit")
-    expect{ response.leave }.to output(/Are you sure you want to quit?/).to_stdout
   end
 end
