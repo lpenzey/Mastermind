@@ -57,7 +57,7 @@ class Code
   end
 
   def feedback(white_pins, red_pins)
-    puts "You have #{red_pins.length} red pins and #{white_pins.length} white pins. Keep going!"
+    puts "You have #{red_pins.length} red pins and #{white_pins.length} white pins."
   end
 
   def won
@@ -108,10 +108,12 @@ class Response
 end
 
 def main
-  game = Welcome.new.show_instructions
+  game = Welcome.new
+  game.show_instructions
   code1 = Code.new
   secret = code1.generate_code
-  10.times do
+  guess = 1
+  while guess <= 10 
     key = secret.clone
     input = Response.new(input).get_input
     red_pins = code1.red_counter(key, input)
@@ -119,6 +121,8 @@ def main
     code1.trim(key, input)
     white_pins = code1.white_counter(key, input)
     code1.feedback(white_pins, red_pins)
+    puts "(#{10-guess} guesses remaining)" 
+    guess += 1 
   end
   print "Nice try, but the answer was " + secret.to_s + " better luck next time!"
 end
