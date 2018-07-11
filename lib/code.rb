@@ -10,15 +10,15 @@ class Code
   end
 
   def red_counter(key, input)
-    red_pins = []
+    @red_pins = []
     position = 0
     while input.length > position
       key.each do |match|
-        red_pins << 1 if key[position] == input[position]
+        @red_pins << 1 if key[position] == input[position]
         position += 1
       end
     end
-    red_pins
+    @red_pins
   end
 
   def trim(key, input)
@@ -41,13 +41,9 @@ class Code
     puts "You have #{red_pins.length} red pins and #{white_pins.length} white pins."
   end
 
-  def won
-    puts "Congratulations, you've cracked the code!"
-    puts "Press \"r\" to restart or anything else to quit"
-    if gets.chomp.downcase == "r"
-      load MASTERMIND 
-    else 
-      abort("Thanks for playing!")
-    end
+  def won?
+   @red_pins == [1, 1, 1, 1]
   end
+
+  
 end
