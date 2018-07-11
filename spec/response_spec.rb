@@ -15,11 +15,4 @@ RSpec.describe Response, "takes user input and gives feedback" do
   it "validates choice of length" do 
     expect(response.valid_length?).to be false
   end
-
-#  describe "#collect_guesses" do 
-#    let(:response) { Response.new("yyyy") }
-#    it "collects past guesses" do
-#      expect(response.collect_guesses).to eq [["y","y","y","y"]]
-#    end
-#  end
 end

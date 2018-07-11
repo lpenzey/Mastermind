@@ -3,6 +3,7 @@ require_relative './commands'
 class Code
   include Commands
   attr_reader :red_pins, :white_pins
+  
   CodeLength = 1..4
   ColorBank = 6
   def generate_code
@@ -42,17 +43,7 @@ class Code
     puts "You have #{red_pins.length} red pins and #{white_pins.length} white pins."
   end
 
-  def collect_guesses(input)
-    previous_guesses = [] << input
-  end
-
-  def won
-    puts "Congratulations, you've cracked the code!"
-    puts "Press \"r\" to restart or anything else to quit"
-    if gets.chomp.downcase == "r"
-      load MASTERMIND 
-    else 
-      abort("Thanks for playing!")
-    end
+  def won?
+   @red_pins == [1, 1, 1, 1]
   end
 end
