@@ -3,22 +3,24 @@ require_relative './commands'
 class Code
   include Commands
   attr_reader :red_pins, :white_pins
-
+  
+  CodeLength = 1..4
+  ColorBank = 6
   def generate_code
     @colors = colors = ["r", "g", "o", "y", "b", "p"]
-    @answer = (1..4).map { @colors[rand(6)] }
+    @answer = (CodeLength).map { @colors[rand(ColorBank)] }
   end
 
   def red_counter(key, input)
-    @red_pins = []
+    red_pins = []
     position = 0
     while input.length > position
       key.each do |match|
-        @red_pins << 1 if key[position] == input[position]
+        red_pins << 1 if key[position] == input[position]
         position += 1
       end
     end
-    @red_pins
+    red_pins
   end
 
   def trim(key, input)
@@ -44,6 +46,4 @@ class Code
   def won?
    @red_pins == [1, 1, 1, 1]
   end
-
-  
 end
