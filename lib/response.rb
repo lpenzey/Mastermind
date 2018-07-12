@@ -1,7 +1,8 @@
 require_relative './commands'
+require_relative './messages'
 
 class Response
-  include Commands
+  include Commands, Messages
   attr_reader :player_input
 
   def initialize(new_input)
@@ -10,7 +11,7 @@ class Response
   end
 
   def get_input
-    puts "Please enter a guess from the available letters (rgobyp):"
+    get_input_message
     @player_input = gets.chomp.downcase.gsub(/[\W]/, "")
     leave if @player_input == "quit"
     get_input if length_error || color_error
@@ -23,7 +24,7 @@ class Response
 
   def length_error
     return false if valid_length?
-    puts "Invalid length, please enter exactly 4 colors"
+    invalid_length_message
     true
   end
 
