@@ -1,4 +1,3 @@
-
 require_relative './messages'
 
 module Commands

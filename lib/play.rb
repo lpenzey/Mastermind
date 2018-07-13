@@ -13,7 +13,6 @@ class Play
     guess  = 1
     while guess <= MAX_GUESS_COUNT
       key = secret.clone
-      print key
       input = Response.new(input).get_input
       red_pins = @mastermind.red_counter(key, input)
       break if @mastermind.won? 
