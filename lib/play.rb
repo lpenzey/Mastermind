@@ -9,26 +9,26 @@ class Play
 
   def game_loop
     @mastermind = Code.new
-    secret = @mastermind.generate_code
+    @secret = @mastermind.generate_code
     guess  = 1
     while guess <= MAX_GUESS_COUNT
-      key = secret.clone
+      key = @secret.clone
       input = Response.new(input).get_input
-      red_pins = @mastermind.red_counter(key, input)
-      break if @mastermind.won? 
+      @red_pins = @mastermind.red_counter(key, input)
+      break if @mastermind.won?(@red_pins)
       @mastermind.trim(key, input)
       white_pins = @mastermind.white_counter(key, input)
-      @mastermind.feedback(white_pins, red_pins)
+      @mastermind.feedback(white_pins, @red_pins)
       remaining_guesses(guess)
       guess += 1 
     end
   end
 
   def end_game
-    if @mastermind.won?
+    if @mastermind.won?(@red_pins)
       won_message
     else 
-      lost_message
+      lost_message(@secret)
     end
     restart
   end

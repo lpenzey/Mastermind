@@ -43,7 +43,7 @@ class Code
     puts "You have #{red_pins.length} red pins and #{white_pins.length} white pins."
   end
 
-  def won?
-   @red_pins == [1, 1, 1, 1]
+  def won?(red_pins)
+   true if red_pins == [1, 1, 1, 1]
   end
 end

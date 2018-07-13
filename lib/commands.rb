@@ -10,6 +10,7 @@ module Commands
           when "y"
             abort("Thanks for playing!")
           when "r"
+            system "clear"
             load MASTERMIND
           when "s"
             save
@@ -21,6 +22,7 @@ module Commands
   def restart
         restart_options
         if gets.chomp.downcase == "r"
+          system "clear"
           load MASTERMIND
         else
           abort("Thanks for playing!")

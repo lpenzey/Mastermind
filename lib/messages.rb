@@ -12,26 +12,31 @@ module Messages
     	puts "Congratulations, you've cracked the code!"
   	end
 
-	def lost_message
-	  	puts "Better luck next time!"
+	def lost_message(secret)
+	  	puts "Better luck next time! The secret code was #{secret.to_s}"
 	end 
 
 	def remaining_guesses(guess)
 		puts "(#{10-guess} guesses remaining)\n\n" 
 	end
 
+	def invalid_length_message
+		puts "Invalid length, please enter exactly 4 colors"
+	end
+
+	def get_input_message
+	    puts "Please enter a guess from the available letters (rgobyp):"
+	end
+
 def show_instructions
     puts "Welcome to Mastermind! Your challenge is
-to guess the secret four digit code in under 10 tries."
-    puts ""
-    puts "The code can include the following colors:
-Red(r), Green(g), Orange(o), Blue(b), Yellow(y) and Purple(p)
-Enter your guess by entering four color values from above, such as rgyb or pggy."
-    puts ""
-    puts "If you have a correct color in the right position, you get a red pin.
-If you have a correct color in the wrong position, you get a white pin"
-    puts ""
-    puts 'type \'quit\' at any time to quit/restart, or hit enter to continue.'
+to guess the secret four digit code in under 10 tries.\n\n
+The code can include the following colors:
+Red(r), Green(g), Orange(o), Blue(b), Yellow(y) and Purple(p)\n\n
+Enter your guess by entering four color values from above, such as rgyb or pggy.
+If you have a correct color in the right position, you get a red pin.\n\n
+If you have a correct color in the wrong position, you get a white pin
+type \'quit\' at any time to quit/restart.\n\n"
   end
 
 end
