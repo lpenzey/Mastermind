@@ -6,7 +6,6 @@ class Response
   attr_reader :player_input
 
   def initialize(new_input)
-    @valid_guess = false
     @player_input = new_input
   end
 

@@ -7,13 +7,18 @@ class Play
   include Commands, Messages
    MAX_GUESS_COUNT ||= 10
 
-  def game_loop
+   def initialize 
     @mastermind = Code.new
     @secret = @mastermind.generate_code
-    guess  = 1
+  end 
+
+  def game_loop
+    guess = 1
+    previous_guesses = []
     while guess <= MAX_GUESS_COUNT
-      key = @secret.clone
       input = Response.new(input).get_input
+      previous_guesses << input.clone
+      key = @secret.clone
       @red_pins = @mastermind.red_counter(key, input)
       break if @mastermind.won?(@red_pins)
       @mastermind.trim(key, input)
@@ -33,5 +38,3 @@ class Play
     restart
   end
 end
-
-
