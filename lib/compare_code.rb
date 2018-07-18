@@ -16,13 +16,13 @@ include Messages
   end
 
   def trim(key, input)
-   4.times do |n|
-    if input[n] == key[n]
-      input[n] = ""
-      key[n] = ""
+    4.times do |n|
+      if input[n] == key[n]
+        input[n] = ""
+        key[n] = ""
+      end
     end
-  end
-  input
+    input
   end
 
   def white_counter(key, input)
@@ -36,7 +36,7 @@ include Messages
   end
 
   def won?(red_pins)
-   true if red_pins == [1, 1, 1, 1]
+    red_pins == [1, 1, 1, 1]
   end
 
 end

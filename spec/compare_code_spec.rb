@@ -57,15 +57,4 @@ describe "#red_counter" do
       expect(code.white_counter(key, input)).to eq ["b", "r"]
     end
   end
-
-  describe "#feedback" do
-    let(:key) { ["y", "b", "p", "o"] }
-    let(:input) { ["y", "b", "p", "r"] }
-    let(:white_pins) { [1, 1] }
-    let(:red_pins) { [1, 1] }
-
-    it "gives pin feedback to user" do
-      expect { code.feedback(white_pins, red_pins)}.to output("You have #{red_pins.length} red pins and #{white_pins.length} white pins.\n").to_stdout
-    end
-  end
 end
