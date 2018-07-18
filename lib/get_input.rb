@@ -11,11 +11,12 @@ class GetInput
     @validator = ValidateInput.new
   end
 
-  def new_guess
+  def get_guess
     get_input_message
     @new_guess = gets.chomp.downcase.gsub(/[\W]/, "")
     leave if @new_guess == "quit"
-    new_guess if @validator.length_error(new_guess) || @validator.color_error(new_guess)
+    get_guess if @validator.length_error(new_guess) || @validator.color_error(new_guess)
     @new_guess.split(//)
   end
+
 end

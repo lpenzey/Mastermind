@@ -15,7 +15,7 @@ class Play
   def game_loop(turn = 1, previous_guesses = [], secret = Code.new.generate_code )
     @secret = secret
     while turn <= MAX_TURN_COUNT
-      guess = GetInput.new(guess).new_guess
+      guess = GetInput.new(guess).get_guess
       previous_guesses << guess.clone
       key = @secret.clone
       @red_pins = @pin_counter.red_counter(key, guess)

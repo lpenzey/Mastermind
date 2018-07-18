@@ -1,4 +1,7 @@
+require_relative './messages'
+
 class CompareCode
+include Messages
 
 	def red_counter(key, input)
     red_pins = []
@@ -29,7 +32,7 @@ class CompareCode
   end
 
   def feedback(white_pins, red_pins)
-    puts "You have #{red_pins.length} red pins and #{white_pins.length} white pins."
+    feedback_message(white_pins, red_pins)
   end
 
   def won?(red_pins)

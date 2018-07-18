@@ -12,4 +12,4 @@ class Code
     @answer = (CodeLength).map { @colors[rand(ColorBank)] }
   end
 
-  end
+end
