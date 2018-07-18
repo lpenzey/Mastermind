@@ -1,7 +1,4 @@
-require_relative './code'
 require_relative './play'
-require_relative './response'
-require_relative './commands'
 
 def main
   game = Play.new
