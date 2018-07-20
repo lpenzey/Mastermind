@@ -3,7 +3,7 @@ require "compare_code"
 RSpec.describe CompareCode, "creates and compares code with guess" do
   let(:code) { CompareCode.new }
 
-describe "#red_counter" do
+  describe "#red_counter" do
     it "returns number of red pins" do
       key   = ["r", "r", "r", "r"]
       input = ["r", "r", "r", "r"] 
@@ -49,11 +49,10 @@ describe "#red_counter" do
       input = ["r", "r", "g", "g"] 
       expect(code.white_counter(key, input)).to eq ["g", "g", "r", "r"]
     end
-  
-    let(:key) { ["b", "g", "r", "g"] }
-    let(:input) { ["r", "", "b", ""] }
 
     it "accurately counts white pins with duplicates" do
+      key   = ["b", "g", "r", "g"]
+      input = ["r", "", "b", ""] 
       expect(code.white_counter(key, input)).to eq ["b", "r"]
     end
   end

@@ -1,7 +1,7 @@
 require_relative './messages'
 
 class CompareCode
-include Messages
+  include Messages
 
 	def red_counter(key, input)
     red_pins = []
@@ -38,5 +38,4 @@ include Messages
   def won?(red_pins)
     red_pins == [1, 1, 1, 1]
   end
-
 end

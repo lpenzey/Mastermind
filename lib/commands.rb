@@ -14,8 +14,8 @@ module Commands
             load MASTERMIND
           when "s"
             save
-          else
-            puts "I don't understand"
+          when "n"
+            get_guess 
         end
   end
 
@@ -30,6 +30,5 @@ module Commands
   end
   
   def save
-    puts "Thanks for saving!"
-  end 
+  end
 end
