@@ -29,4 +29,22 @@ RSpec.describe Commands, "lets user quit or restart or save" do
 		  end
 		end
 	end
+
+	describe "#restart" do 
+		context "when input is r" do
+		  it "loads new game" do
+		  	allow(commands).to receive(:gets).and_return('r')
+		  	expect(commands).to receive(:load)
+		  	commands.restart
+		  end
+		end
+
+		context "when input is not y, r, or s" do
+		  it "does not end the game" do
+		  	allow(commands).to receive(:gets).and_return('home run derby')
+		  	expect(commands).to receive(:abort)
+		  	commands.restart
+		  end
+		end
+	end
 end
