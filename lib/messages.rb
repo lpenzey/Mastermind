@@ -57,3 +57,4 @@ If you have a correct color in the wrong position, you get a white pin
 type \'quit\' at any time to quit/restart.\n\n"
 	 end
 end
+
