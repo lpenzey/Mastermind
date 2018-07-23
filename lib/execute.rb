@@ -9,7 +9,6 @@ guess_input = GetInput.new
 play = Play.new(compare_code, guess_input)
 code = Code.new
 
-
 mastermind_runner = MastermindRunner.new(play, code)
 
 mastermind_runner.execute
