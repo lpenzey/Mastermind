@@ -1,35 +1,42 @@
 require_relative './messages'
+require_relative './play'
 
-module Commands
-  include Messages
-  MASTERMIND = 'execute.rb'
+class Commands
+include Messages
+
   def leave
-      quit_options
-        answer = gets.chomp.downcase
+    quit_options
+      answer = gets.chomp.downcase
         case answer 
           when "y"
             abort("Thanks for playing!")
           when "r"
-            system "clear"
-            load MASTERMIND
+            system("clear && ruby execute.rb")
           when "s"
-            save
-          else
-            puts "I don't understand"
+            save_game(turn, previous_gueses, secret)
+          when "n"
+            get_guess 
         end
   end
 
   def restart
-        restart_options
-        if gets.chomp.downcase == "r"
-          system "clear"
-          load MASTERMIND
-        else
-          abort("Thanks for playing!")
-        end
+    restart_options
+      if gets.chomp.downcase == "r"
+        system("clear && ruby execute.rb")
+      else
+        abort("Thanks for playing!")
+      end
   end
-  
-  def save
-    puts "Thanks for saving!"
-  end 
+
+  def save_game(turn, previous_guesses, secret)
+    game_1 = {
+      :turn => turn, 
+      :previous_guesses => previous_guesses,
+      :secret => secret
+    }
+
+    File.open("saved_games.json","w") do |f|
+      f.write(game_1.to_json)
+    end
+  end
 end
