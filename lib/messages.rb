@@ -62,3 +62,4 @@ If you have a correct color in the wrong position, you get a white pin
 type \'quit\' at any time to quit/restart. Your progress is automatically saved.\n\n"
 	 end
 end
+

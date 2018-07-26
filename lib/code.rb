@@ -8,3 +8,4 @@ COLORS = ["r", "g", "o", "y", "b", "p"]
     answer = (CODE_LENGTH).map { COLORS[rand(COLOR_BANK)] }
   end
 end
+
