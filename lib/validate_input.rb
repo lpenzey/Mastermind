@@ -1,5 +1,6 @@
 require_relative './get_input'
 require_relative './messages'
+require_relative './code'
 
 class ValidateInput
   include Messages
@@ -15,12 +16,12 @@ class ValidateInput
   end
 
   def valid_colors?(new_guess)
-    true if /\A[rgobyp][rgobyp][rgobyp][rgobyp]\z/.match(new_guess.to_s)
+    new_guess.chars.all? { |c| Code::COLORS.include?(c) }
   end
 
   def color_error(new_guess)
     return false if valid_colors?(new_guess)
-    puts "Invalid colors, please enter only available colors: r, g, o, y, b, p."
+    invalid_color_message    
     true
   end
 end

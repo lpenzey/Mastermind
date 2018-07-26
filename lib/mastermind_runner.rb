@@ -15,8 +15,8 @@ class MastermindRunner
         answer = gets.chomp.downcase
           if answer == "y"
             saved_game_state = @play.load_saved_games
-            remaining_guesses_message(saved_game_state["turn"])
-            display_previous_guesses(saved_game_state["previous_guesses"])
+            display_previous_guesses(saved_game_state["previous_guesses"], saved_game_state["turn"])
+            saved_game_state["turn"] += 1
             @play.game_loop(saved_game_state["turn"], saved_game_state["previous_guesses"], saved_game_state["secret"])
             @play.end_game
           else

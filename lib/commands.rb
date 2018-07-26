@@ -27,16 +27,4 @@ include Messages
         abort("Thanks for playing!")
       end
   end
-
-  def save_game(turn, previous_guesses, secret)
-    game_1 = {
-      :turn => turn, 
-      :previous_guesses => previous_guesses,
-      :secret => secret
-    }
-
-    File.open("saved_games.json","w") do |f|
-      f.write(game_1.to_json)
-    end
-  end
 end

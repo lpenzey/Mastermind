@@ -47,19 +47,20 @@ class Play
     @secret = secret
     while turn <= MAX_TURN_COUNT
       guess = @get_input.get_guess
-      previous_guesses << guess.clone
-      key = @secret.clone
-      @red_pins = @pin_counter.red_counter(key, guess)
-      previous_guesses << @red_pins
+      @red_pins = @pin_counter.red_counter(secret, guess)
+      white_pins = @pin_counter.white_pins(secret, guess)
       break if @pin_counter.won?(@red_pins)
-      @pin_counter.trim(key, guess)
-      white_pins = @pin_counter.white_counter(key, guess)
-      previous_guesses << white_pins
-      display_previous_guesses(previous_guesses)
-      remaining_guesses_message(turn)
-      turn += 1
+      create_previous_guesses(previous_guesses, guess, white_pins, @red_pins)
+      display_previous_guesses(previous_guesses, turn)
       save_game(turn, previous_guesses, secret)
+      turn += 1
     end
+  end
+
+  def create_previous_guesses(previous_guesses, guess, white_pins, red_pins)
+    previous_guesses << guess
+    previous_guesses << red_pins
+    previous_guesses << white_pins
   end
 
   def end_game

@@ -7,13 +7,13 @@ RSpec.describe CompareCode, "creates and compares code with guess" do
     it "returns number of red pins" do
       key   = ["r", "r", "r", "r"]
       input = ["r", "r", "r", "r"] 
-      expect(code.red_counter(key, input)).to eq [1, 1, 1, 1]
+      expect(code.red_counter(key, input)).to eq 4
     end
 
     it "returns number of red pins" do
       key   = ["r", "r", "y", "b"]
       input = ["r", "r", "p", "o"] 
-      expect(code.red_counter(key, input)).to eq [1, 1]
+      expect(code.red_counter(key, input)).to eq 2
     end
   end 
 
@@ -35,25 +35,25 @@ RSpec.describe CompareCode, "creates and compares code with guess" do
     it "accurately counts white pins" do
       key   = ["y", "b", "y", "r"]
       input = ["", "y", "b", ""] 
-      expect(code.white_counter(key, input)).to eq ["y", "b"]
+      expect(code.white_counter(key, input)).to eq 2
     end
 
     it "accurately counts white pins with duplicates" do
       key   = ["b", "y", "y", "b"]
       input = ["b", "", "", ""] 
-      expect(code.white_counter(key, input)).to eq ["b"]
+      expect(code.white_counter(key, input)).to eq 1
     end
 
     it "accurately counts white pins with no matches" do
       key   = ["g", "g", "r", "r"]
       input = ["r", "r", "g", "g"] 
-      expect(code.white_counter(key, input)).to eq ["g", "g", "r", "r"]
+      expect(code.white_counter(key, input)).to eq 4
     end
 
     it "accurately counts white pins with duplicates" do
       key   = ["b", "g", "r", "g"]
       input = ["r", "", "b", ""] 
-      expect(code.white_counter(key, input)).to eq ["b", "r"]
+      expect(code.white_counter(key, input)).to eq 2
     end
   end
 end
