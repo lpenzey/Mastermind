@@ -55,5 +55,11 @@ RSpec.describe CompareCode, "creates and compares code with guess" do
       input = ["r", "", "b", ""] 
       expect(code.white_counter(key, input)).to eq 2
     end
+
+    it "accurately counts white pins with nothing in common" do
+      key   = ["b", "g", "r", "g"]
+      input = ["y", "y", "y", "y"] 
+      expect(code.white_counter(key, input)).to eq 0
+    end
   end
 end

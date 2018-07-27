@@ -1,4 +1,4 @@
-require "get_input"
+require 'get_input'
 
 RSpec.describe GetInput, "receives valid user input" do
   	let(:user) { GetInput.new }

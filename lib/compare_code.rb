@@ -26,10 +26,9 @@ class CompareCode
   end
 
   def white_counter(key, input)
-    white_pins = (key & input)
-    .flat_map { |n| [n]*[key.count(n), input.count(n)].min }
-    .reject { |c| c.empty? }
-    white_pins = white_pins.size
+    white_pins = (key & input).flat_map { 
+      |n| [n]*[key.count(n), input.count(n)].min }
+    white_pins.size
   end
 
   def feedback(white_pins, red_pins, previous_guesses)
@@ -45,5 +44,9 @@ class CompareCode
     input = guess.clone
     trim(key, input)
     white_pins = white_counter(key, input)
+  end
+
+  def count_all(key, input)
+    [red_counter(key, input), white_pins(key, input)]
   end
 end
