@@ -1,7 +1,5 @@
+# frozen_string_literal: true
+
 class ComputerPlayer
-
-	def initialize
-
-	end
-	
+  def initialize; end
 end

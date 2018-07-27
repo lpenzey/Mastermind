@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative './commands'
 require_relative './code'
 require_relative './compare_code'
@@ -13,12 +15,12 @@ class Play
     @pin_counter = compare_code
     @commands = Commands.new
     @get_input = get_input
-    code = Code.new()
-  end 
+    code = Code.new
+  end
 
   def find_saved_games?
     !File.stat('saved_games.json').zero?
-  end 
+  end
 
   def load_saved_games
     file = File.read('saved_games.json')
@@ -27,20 +29,20 @@ class Play
 
   def save_game(turn, previous_guesses, secret)
     game_1 = {
-      :turn => turn, 
-      :previous_guesses => previous_guesses,
-      :secret => secret
+      turn: turn,
+      previous_guesses: previous_guesses,
+      secret: secret
     }
 
-    File.open("saved_games.json","w") do |f|
+    File.open('saved_games.json', 'w') do |f|
       f.write(game_1.to_json)
     end
   end
 
   def delete_saved_game
-    File.open("saved_games.json","w") do |f|
-      f.write("")
-      end
+    File.open('saved_games.json', 'w') do |f|
+      f.write('')
+    end
   end
 
   def game_loop(turn, previous_guesses, secret)
@@ -65,11 +67,11 @@ class Play
 
   def end_game
     delete_saved_game
-      if @pin_counter.won?(@red_pins)
-        won_message
-      else 
-        lost_message(@secret)
-      end
-       @commands.restart
+    if @pin_counter.won?(@red_pins)
+      won_message
+    else
+      lost_message(@secret)
+    end
+    @commands.restart
   end
 end

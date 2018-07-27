@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative './messages'
 
 class CompareCode
@@ -7,7 +9,7 @@ class CompareCode
     red_pins = 0
     position = 0
     while input.length > position
-      key.each do |match|
+      key.each do |_match|
         red_pins += 1 if key[position] == input[position]
         position += 1
       end
@@ -18,8 +20,8 @@ class CompareCode
   def trim(key, input)
     4.times do |n|
       if input[n] == key[n]
-        input[n] = ""
-        key[n] = ""
+        input[n] = ''
+        key[n] = ''
       end
     end
     input
@@ -27,8 +29,8 @@ class CompareCode
 
   def white_counter(key, input)
     white_pins = (key & input)
-    .flat_map { |n| [n]*[key.count(n), input.count(n)].min }
-    .reject { |c| c.empty? }
+                 .flat_map { |n| [n] * [key.count(n), input.count(n)].min }
+                 .reject(&:empty?)
     white_pins = white_pins.size
   end
 
