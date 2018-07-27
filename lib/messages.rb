@@ -5,7 +5,7 @@ module Messages
  	end 
 
 	def restart_options
-  	puts "Would you like to quit or restart? Type \"q\" to quit or \"r\" to restart."
+  		puts "Would you like to quit or restart? Type \"q\" to quit or \"r\" to restart."
 	end
 
 	def won_message
@@ -13,7 +13,7 @@ module Messages
 	end
 
 	def lost_message(secret)
-	  puts "Better luck next time! The secret code was #{secret.to_s}"
+	  	puts "Better luck next time! The secret code was #{secret.to_s}"
 	end 
 
 	def remaining_guesses_message(turn)
@@ -29,7 +29,7 @@ module Messages
 	end
 
 	def get_input_message
-	  puts "Please enter a guess from the available letters (rgobyp):"
+	  	puts "Please enter a guess from the available letters (rgobyp):"
 	end
 
 	def saved_game_message
