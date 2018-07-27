@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative './get_input'
 require_relative './messages'
 require_relative './code'
@@ -21,7 +23,7 @@ class ValidateInput
 
   def color_error(new_guess)
     return false if valid_colors?(new_guess)
-    invalid_color_message    
+    invalid_color_message
     true
   end
 end

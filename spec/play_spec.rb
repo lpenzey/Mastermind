@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'play'
 
 RSpec.describe Play, 'welcome user and show game commands' do
