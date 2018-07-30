@@ -1,12 +1,15 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
 require_relative './play'
+require_relative './compare_code'
+require_relative './mastermind_runner'
 
-def main
-  game = Play.new
-  game.show_instructions
-  game.game_loop
-  game.end_game
-end 
+compare_code = CompareCode.new
+guess_input = GetInput.new
+play = Play.new(compare_code, guess_input)
+code = Code.new
 
-if __FILE__ == $0
-  main
-end
+mastermind_runner = MastermindRunner.new(play, code)
+
+mastermind_runner.execute

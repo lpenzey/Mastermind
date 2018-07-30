@@ -1,15 +1,11 @@
-require_relative './commands'
+# frozen_string_literal: true
 
 class Code
-  include Commands
-  attr_reader :red_pins, :white_pins
-  
-  CodeLength = 1..4
-  ColorBank = 6
-  
-  def generate_code
-    @colors = colors = ["r", "g", "o", "y", "b", "p"]
-    @answer = (CodeLength).map { @colors[rand(ColorBank)] }
-  end
+  CODE_LENGTH = 1..4
+  COLOR_BANK = 6
+  COLORS = %w[r g o y b p].freeze
 
+  def generate_code
+    answer = CODE_LENGTH.map { COLORS[rand(COLOR_BANK)] }
+   end
 end
